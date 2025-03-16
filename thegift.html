@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Complete Medium | Develop Your Abilities</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #818CF8;
+            --primary-dark: #3730A3;
+            --secondary: #F7F7F9;
+            --accent: #F97316;
+            --accent-secondary: #06B6D4;
+            --dark: #1E293B;
+            --light: #FFFFFF;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-500: #64748B;
+            --gray-700: #334155;
+            --text: #0F172A;
+            --border-radius: 12px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            color: var(--text);
+            background-color: var(--light);
+            overflow-x: hidden;
+            font-size: 16px;
+        }
+        
+        .page-wrapper {
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        /* Announcement Bar */
+        .announcement-bar {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 0.75rem 0;
+            text-align: center;
+            position: relative;
+            z-index: 60;
+        }
+        
+        .announcement-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+        
+        .announcement-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .announcement-icon {
+            margin-right: 0.5rem;
+            color: var(--accent);
+        }
+        
+        /* Header */
+        .header {
+            padding: 1rem 5%;
+            background-color: var(--light);
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .header.scrolled {
+            padding: 0.75rem 5%;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--dark);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 7rem 5% 5rem;
+            background-color: var(--secondary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .hero-content {
+            grid-column: 1 / 8;
+            grid-row: 1;
+            padding-top: 2rem;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-light);
+            color: var(--light);
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .badge-icon {
+            margin-right: 0.5rem;
+        }
+        
+        .hero-title {
+            font-size: 2.75rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.25rem;
+            color: var(--dark);
+            letter-spacing: -0.015em;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero-title .highlight {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            font-size: 3.1rem;
+            font-weight: 700;
+            font-style: italic;
+            margin: 0 0.15rem;
+            padding-bottom: 6px; /* Create space for the underline */
+            animation: subtleGlow 2s ease-in-out 2s;
+        }
+        
+        @keyframes subtleGlow {
+            0%, 100% {
+                text-shadow: none;
+            }
+            50% {
+                text-shadow: 0 0 8px rgba(79, 70, 229, 0.3);
+            }
+        }
+        
+        .hero-title .highlight::after {
+            content: "";
+            position: absolute;
+            bottom: 0px;
+            left: 0;
+            width: 100%;
+            height: 2.5px;
+            background-color: var(--primary);
+            opacity: 0.9;
+            transform-origin: left;
+            transform: scaleX(0);
+            animation: signatureDraw 1.5s ease-out forwards 0.5s;
+        }
+        
+        .hero-title .highlight::before {
+            content: "";
+            position: absolute;
+            bottom: 3px;
+            left: 5px;
+            width: 85%;
+            height: 1.5px;
+            background-color: var(--primary-light);
+            opacity: 0.8;
+            transform-origin: left;
+            transform: scaleX(0);
+            animation: signatureDraw 1.2s ease-out forwards 0.8s;
+        }
+        
+        @keyframes signatureDraw {
+            0% {
+                transform: scaleX(0);
+            }
+            100% {
+                transform: scaleX(1);
+            }
+        }
+        
+        @keyframes signatureDraw {
+            0% {
+                transform: scaleX(0);
+            }
+            100% {
+                transform: scaleX(1);
+            }
+        }
+        
+        .hero-subtitle {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 1.75rem;
+            color: var(--gray-700);
+        }
+        
+        .instructor {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.75rem;
+        }
+        
+        .instructor-image {
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 9999px;
+            background-color: var(--primary);
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        
+        .instructor-details {
+            line-height: 1.4;
+        }
+        
+        .instructor-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--dark);
+        }
+        
+        .instructor-title {
+            font-size: 0.825rem;
+            color: var(--gray-500);
+        }
+        
+        .hero-description {
+            font-size: 1rem;
+            margin-bottom: 1.75rem;
+            color: var(--gray-700);
+            line-height: 1.6;
+        }
+        
+        .key-benefits {
+            margin-bottom: 1.75rem;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+        
+        .benefit-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 9999px;
+            background-color: var(--primary-light);
+            color: var(--light);
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+        }
+        
+        .benefit-text {
+            font-weight: 500;
+            color: var(--gray-700);
+            font-size: 0.95rem;
+        }
+        
+        .hero-form {
+            grid-column: 8 / 13;
+            grid-row: 1;
+        }
+        
+        .form-card {
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            padding: 2rem;
+            position: relative;
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+        
+        .form-card:hover {
+            transform: translateY(-0.25rem);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .book-display {
+            position: relative;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .book-image {
+            width: 75%;
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+        
+        .book-image:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .free-tag {
+            position: absolute;
+            top: -0.5rem;
+            right: 2rem;
+            background-color: var(--accent);
+            color: var(--light);
+            font-weight: 600;
+            font-size: 0.875rem;
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.375rem;
+            box-shadow: var(--shadow);
+            z-index: 10;
+        }
+        
+        .form-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.75rem;
+            color: var(--dark);
+        }
+        
+        .form-subtitle {
+            text-align: center;
+            margin-bottom: 1.25rem;
+            color: var(--gray-500);
+            font-size: 0.95rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: var(--light);
+            border: 1px solid var(--gray-300);
+            border-radius: 0.375rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text);
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 0.7rem 1.25rem;
+            background-color: var(--primary);
+            color: var(--light);
+            border: none;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+        
+        .btn-icon {
+            margin-left: 0.5rem;
+        }
+        
+        .privacy-text {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            margin-top: 1rem;
+        }
+        
+        /* Journey Section */
+        .journey {
+            padding: 5rem 5%;
+            background-color: var(--light);
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 768px;
+            margin: 0 auto 3rem;
+        }
+        
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.375rem 0.75rem;
+            background-color: var(--primary-light);
+            color: var(--light);
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+        
+        .section-description {
+            font-size: 1rem;
+            color: var(--gray-500);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 2px;
+            background-color: var(--primary-light);
+            border-radius: 9999px;
+        }
+        
+        .day-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+        }
+        
+        .day-item:last-child {
+            padding-bottom: 0;
+        }
+        
+        .day-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -2rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: var(--primary);
+            border: 4px solid var(--light);
+            border-radius: 9999px;
+            box-shadow: var(--shadow);
+        }
+        
+        .day-number {
+            background-color: var(--primary-light);
+            color: var(--light);
+            font-weight: 600;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+        }
+        
+        .day-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--dark);
+        }
+        
+        .day-description {
+            color: var(--gray-700);
+            margin-bottom: 1rem;
+        }
+        
+        .day-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .day-tag {
+            background-color: var(--gray-100);
+            color: var(--gray-700);
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+        }
+        
+        .day-card {
+            background-color: var(--secondary);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .progress-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .progress-track {
+            flex: 1;
+            height: 0.5rem;
+            background-color: var(--gray-200);
+            border-radius: 9999px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary);
+            border-radius: 9999px;
+            transform-origin: left;
+            transform: scaleX(0.1);
+            transition: transform 0.5s ease;
+        }
+        
+        .progress-text {
+            margin-left: 1rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--primary);
+            width: 2.5rem;
+        }
+        
+        .curriculum-preview {
+            margin-top: 3rem;
+            background-color: var(--gray-100);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .preview-content h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .preview-content p {
+            color: var(--gray-700);
+            margin-bottom: 1.5rem;
+        }
+        
+        .preview-image {
+            text-align: center;
+        }
+        
+        .preview-book {
+            max-width: 80%;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+        
+        .preview-book:hover {
+            transform: translateY(-0.5rem) rotate(2deg);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 5rem 5%;
+            background-color: var(--secondary);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial-card {
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-0.25rem);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .testimonial-card::before {
+            content: """;
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            font-size: 4rem;
+            line-height: 1;
+            font-weight: 700;
+            color: var(--gray-200);
+            font-family: serif;
+        }
+        
+        .testimonial-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .testimonial-stars {
+            display: flex;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--gray-700);
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 9999px;
+            background-color: var(--primary-light);
+            margin-right: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        
+        .testimonial-info {
+            line-height: 1.4;
+        }
+        
+        .testimonial-name {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1rem;
+        }
+        
+        .testimonial-title {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 5rem 5%;
+            background-color: var(--primary);
+            color: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before, .cta::after {
+            content: "";
+            position: absolute;
+            width: 15rem;
+            height: 15rem;
+            border-radius: 9999px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+        }
+        
+        .cta::before {
+            top: -5rem;
+            right: -5rem;
+        }
+        
+        .cta::after {
+            bottom: -5rem;
+            left: -5rem;
+        }
+        
+        .cta-container {
+            max-width: 768px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .cta-description {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-form {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            max-width: 32rem;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .cta-btn {
+            background-color: var(--accent);
+        }
+        
+        .cta-btn:hover {
+            background-color: #e15a00;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 2.5rem 5% 1.5rem;
+            background-color: var(--dark);
+            color: var(--gray-300);
+        }
+        
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--light);
+        }
+        
+        .footer-logo span {
+            color: var(--primary-light);
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--gray-300);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--light);
+        }
+        
+        /* Interactive Components & Animations */
+        .progress-item {
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .progress-item:hover .progress-fill {
+            transform: scaleX(1);
+        }
+        
+        .day-item.active::before {
+            background-color: var(--accent);
+        }
+        
+        .day-item.active .day-number {
+            background-color: var(--accent);
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            padding: 4rem 5% 3rem;
+            background-color: var(--light);
+            border-top: 1px solid var(--gray-200);
+        }
+        
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1080px;
+            margin: 2.5rem auto 0;
+        }
+        
+        .step-card {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .step-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 4rem;
+            height: 4rem;
+            margin: 0 auto 1.5rem;
+            background-color: rgba(79, 70, 229, 0.1);
+            border-radius: 50%;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .step-number {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.75rem;
+        }
+        
+        .step-description {
+            font-size: 0.95rem;
+            color: var(--gray-700);
+            line-height: 1.5;
+        }
+        
+        /* Sticky CTA for Mobile */
+        .sticky-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--light);
+            padding: 0.75rem 1rem;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 40;
+            text-align: center;
+        }
+        
+        .sticky-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--light);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.65rem 1.25rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            transition: var(--transition);
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .sticky-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .hero-content {
+                grid-column: 1;
+                grid-row: 1;
+            }
+            
+            .hero-form {
+                grid-column: 1;
+                grid-row: 2;
+                max-width: 32rem;
+                margin: 0 auto;
+            }
+            
+            .curriculum-preview {
+                grid-template-columns: 1fr;
+            }
+            
+            .preview-image {
+                order: -1;
+            }
+            
+            .announcement-container {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .benefit-item {
+                margin-bottom: 0.75rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.25rem;
+            }
+            
+            .hero-title .highlight {
+                font-size: 2.5rem;
+                padding-bottom: 5px;
+            }
+            
+            .section-title {
+                font-size: 1.85rem;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .announcement-container {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0.5rem;
+            }
+            
+            .hero-description {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+            
+            .benefit-text {
+                font-size: 0.9rem;
+            }
+            
+            .key-benefits {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .benefit-item {
+                margin-bottom: 0;
+            }
+            
+            .form-card {
+                padding: 1.25rem;
+            }
+            
+            .book-image {
+                width: 60%;
+            }
+            
+            .steps-container {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+            
+            .sticky-cta {
+                display: block;
+            }
+            
+            /* Add padding to prevent content being hidden behind sticky CTA */
+            .footer {
+                padding-bottom: 5rem;
+            }
+            
+            .hero {
+                padding: 6rem 5% 4rem;
+            }
+            
+            .journey, .how-it-works, .testimonials {
+                padding: 4rem 5% 3rem;
+            }
+            
+            .step-card {
+                padding: 1.25rem;
+            }
+            
+            .step-icon {
+                width: 3.5rem;
+                height: 3.5rem;
+                margin-bottom: 1.25rem;
+            }
+            
+            .step-title {
+                font-size: 1.15rem;
+            }
+            
+            .step-description {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-title {
+                font-size: 1.85rem;
+                line-height: 1.3;
+            }
+            
+            .hero-title .highlight {
+                font-size: 2.1rem;
+                display: inline-block;
+                padding-bottom: 4px;
+            }
+            
+            .hero-title .highlight::after {
+                height: 2px;
+                bottom: 0px;
+            }
+            
+            .hero-title .highlight::before {
+                height: 1px;
+                bottom: 2px;
+                left: 3px;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+                margin-top: 0.75rem;
+            }
+            
+            .benefit-text {
+                font-size: 0.85rem;
+            }
+            
+            .hero-description {
+                font-size: 0.9rem;
+            }
+            
+            .hero-badge {
+                font-size: 0.75rem;
+                padding: 0.375rem 0.75rem;
+            }
+            
+            .form-title {
+                font-size: 1.2rem;
+            }
+            
+            .form-subtitle {
+                font-size: 0.85rem;
+            }
+            
+            .day-title {
+                font-size: 1.2rem;
+            }
+            
+            .timeline {
+                padding-left: 1.5rem;
+            }
+            
+            .day-item::before {
+                left: -1.5rem;
+                width: 1.25rem;
+                height: 1.25rem;
+            }
+            
+            .section-description {
+                font-size: 0.9rem;
+            }
+            
+            .day-description {
+                font-size: 0.9rem;
+            }
+            
+            .testimonial-text {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.7rem;
+            }
+            
+            .hero-title .highlight {
+                font-size: 1.9rem;
+                padding-bottom: 3px;
+            }
+            
+            .hero-title .highlight::after {
+                height: 1.5px;
+            }
+            
+            .hero-title .highlight::before {
+                height: 1px;
+                width: 80%;
+            }
+            
+            .instructor-image {
+                width: 2.5rem;
+                height: 2.5rem;
+                font-size: 1.1rem;
+            }
+            
+            .instructor-title {
+                font-size: 0.75rem;
+            }
+            
+            .hero-badge {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.6rem;
+            }
+            
+            .benefit-icon {
+                width: 1.1rem;
+                height: 1.1rem;
+            }
+            
+            .step-icon {
+                width: 3rem;
+                height: 3rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- New Announcement Bar -->
+        <div class="announcement-bar">
+            <div class="announcement-container">
+                <div class="announcement-item">
+                    <span class="announcement-icon">⭐</span>
+                    <span>Over 5,000 Successful Students</span>
+                </div>
+                <div class="announcement-item">
+                    <span class="announcement-icon">🏫</span>
+                    <span>Taught at Arthur Findlay College</span>
+                </div>
+                <div class="announcement-item">
+                    <span class="announcement-icon">🌟</span>
+                    <span>30+ Years Professional Experience</span>
+                </div>
+            </div>
+        </div>
+        
+        <header class="header" id="header">
+            <div class="header-container">
+                <a href="#" class="logo">The <span>Complete</span> Medium</a>
+            </div>
+        </header>
+        
+        <section class="hero">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="badge-icon">✨</span>
+                        <span>10-Day Email Journey</span>
+                    </div>
+                    
+                    <h1 class="hero-title">Discover Your <span class="highlight">Authentic</span> Mediumship Path in 10 Days</h1>
+                    <h2 class="hero-subtitle">A modern, step-by-step approach to spiritual development without rigid formulas</h2>
+                    
+                    <div class="instructor">
+                        <div class="instructor-image">M</div>
+                        <div class="instructor-details">
+                            <div class="instructor-name">Mia Ottosson</div>
+                            <div class="instructor-title">Professional Medium & Tutor at Arthur Findlay College</div>
+                        </div>
+                    </div>
+                    
+                    <p class="hero-description">After 30+ years of professional mediumship and teaching at the world's foremost spiritual college, I've distilled the most essential practices that transform not just your mediumship abilities, but your entire spiritual and personal development journey.</p>
+                    
+                    <div style="background-color: rgba(129, 140, 248, 0.1); border-radius: 0.75rem; padding: 1rem; margin-bottom: 1.75rem;">
+                        <p style="font-size: 0.95rem; color: var(--gray-700); font-style: italic; margin: 0; line-height: 1.6;">
+                            "My approach isn't about forcing you into rigid techniques or boxes of information. I believe in nurturing your authentic self and unique way of working. I encourage experimentation, exploration, and the courage to develop your own voice as a medium."
+                        </p>
+                        <p style="font-size: 0.85rem; color: var(--primary); font-weight: 600; margin: 0.5rem 0 0 0; text-align: right;">— Mia Ottosson</p>
+                    </div>
+                    
+                    <style>
+                        @media (max-width: 640px) {
+                            .hero-content div[style*="background-color: rgba(129, 140, 248, 0.1)"] {
+                                padding: 0.8rem;
+                                margin-bottom: 1.5rem;
+                            }
+                            
+                            .hero-content div[style*="background-color: rgba(129, 140, 248, 0.1)"] p:first-child {
+                                font-size: 0.85rem;
+                            }
+                            
+                            .hero-content div[style*="background-color: rgba(129, 140, 248, 0.1)"] p:last-child {
+                                font-size: 0.8rem;
+                            }
+                        }
+                    </style>
+                    
+                    <div class="key-benefits">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <div class="benefit-text">Daily email lessons with practical exercises</div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <div class="benefit-text">Step-by-step skill development process</div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <div class="benefit-text">Complete eBook guide on day 10</div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <div class="benefit-text">Exclusive subscriber-only video content</div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <div class="benefit-text">Access to private live sessions</div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <div class="benefit-text">Priority notification for private reading bookings</div>
+                        </div>
+                    </div>
+                    
+                    <p class="hero-description">This free 10-day email journey shares the exact foundation I wish I'd had when I started—no fluff, just practical guidance delivered directly to your inbox. Plus, as a subscriber, you'll gain exclusive access to ongoing video content, live sessions, and be first to know when private reading appointments* become available. Mediumship is about more than just spirit communication—it's a pathway to profound spiritual and personal growth.</p>
+                    <p style="font-size: 0.85rem; color: var(--gray-500); margin-top: -1rem; margin-bottom: 2rem; font-style: italic;">*Private readings are a paid service, but subscribers receive priority booking access.</p>
+                </div>
+                
+                <div class="hero-form">
+                    <div class="form-card">
+                        <div class="book-display">
+                            <img src="https://i.imgur.com/xM0U2UL.jpeg" alt="The Complete Medium eBook" class="book-image">
+                            <div class="free-tag">FREE</div>
+                        </div>
+                        
+                        <h3 class="form-title">Start Your Development Journey</h3>
+                        <p class="form-subtitle">Enter your email to receive your first lesson immediately</p>
+                        
+                        <div style="background-color: #f0f5ff; border-left: 4px solid var(--primary); padding: 1rem; margin-bottom: 1.5rem; border-radius: 0.375rem;">
+                            <p style="font-weight: 500; font-size: 0.9rem; color: var(--dark); margin-bottom: 0.5rem;">✨ <strong>Beyond the 10-Day Journey (All 100% Free)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--gray-700); margin: 0;">Join our community to receive exclusive videos, invitations to subscriber-only live sessions, and priority access to private readings* — all at no cost.</p>
+                            <p style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.5rem; font-style: italic;">*Private readings are paid services, but subscribers get priority booking access.</p>
+                        </div>
+                        
+                        <form action="#" method="POST">
+                            <div class="form-group">
+                                <label for="email" class="form-label">Where should we send your first lesson?</label>
+                                <input type="email" id="email" class="form-control" placeholder="Enter your preferred email" required>
+                            </div>
+                            <button type="submit" class="btn">
+                                Begin My Mediumship Development
+                                <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                </svg>
+                            </button>
+                            <p style="text-align: center; font-size: 0.85rem; color: var(--primary-dark); margin-top: 0.75rem; font-weight: 500;">Join 400+ students developing their abilities</p>
+                        </form>
+                        <p class="privacy-text">Your data is secure. We'll never share your information or send spam. <strong>You can unsubscribe at any time.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-badge">Simple Process</div>
+                    <h2 class="section-title">How It Works</h2>
+                    <p class="section-description">Our straightforward approach to spiritual and personal development through mediumship</p>
+                </div>
+                
+                <div class="steps-container">
+                    <div class="step-card">
+                        <div class="step-icon">✉️</div>
+                        <div class="step-number">Step 1</div>
+                        <h3 class="step-title">Join the Journey</h3>
+                        <p class="step-description">Sign up with your email to receive your first lesson immediately and begin your spiritual development path.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-icon">🧘</div>
+                        <div class="step-number">Step 2</div>
+                        <h3 class="step-title">Daily Practice</h3>
+                        <p class="step-description">Follow simple daily exercises designed to develop both your mediumship abilities and overall spiritual growth.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-icon">✨</div>
+                        <div class="step-number">Step 3</div>
+                        <h3 class="step-title">Transform</h3>
+                        <p class="step-description">Experience personal and spiritual transformation as your intuitive abilities and connection deepen.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="journey">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-badge">Your 10-Day Journey</div>
+                    <h2 class="section-title">Step-by-Step Medium Development</h2>
+                    <p class="section-description">Follow this structured approach to develop your abilities with confidence</p>
+                </div>
+                
+                <div class="timeline">
+                    <div class="day-item active">
+                        <div class="day-number">Day 1</div>
+                        <h3 class="day-title">Sitting in the Power</h3>
+                        <p class="day-description">The foundational practice that creates the energetic conditions for clear, consistent spirit communication. Learn how to establish the proper state of mind and energy.</p>
+                        <div class="day-tags">
+                            <span class="day-tag">Foundation</span>
+                            <span class="day-tag">Energy Work</span>
+                        </div>
+                        
+                        <div class="day-card">
+                            <div class="progress-item" data-progress="10">
+                                <div class="progress-bar">
+                                    <div class="progress-track">
+                                        <div class="progress-fill"></div>
+                                    </div>
+                                    <div class="progress-text">10%</div>
+                                </div>
+                            </div>
+                            <p>In this lesson, you'll learn the most critical practice for any medium: how to establish the proper energetic state for clear connections. We'll cover:</p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.75rem;">
+                                <li>Creating sacred space for your practice</li>
+                                <li>The proper meditation technique for mediumship</li>
+                                <li>How to recognize when you're "in the power"</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="day-item">
+                        <div class="day-number">Day 2</div>
+                        <h3 class="day-title">The Mechanics of Connection</h3>
+                        <p class="day-description">Understanding exactly how spirit communication works, removing the mystery and building your confidence through knowledge of the process.</p>
+                        <div class="day-tags">
+                            <span class="day-tag">Theory</span>
+                            <span class="day-tag">Confidence</span>
+                        </div>
+                    </div>
+                    
+                    <div class="day-item">
+                        <div class="day-number">Day 3</div>
+                        <h3 class="day-title">Evidential Development</h3>
+                        <p class="day-description">Moving beyond "I feel something" to delivering specific, meaningful evidence that validates the connection with undeniable clarity.</p>
+                        <div class="day-tags">
+                            <span class="day-tag">Evidence</span>
+                            <span class="day-tag">Validation</span>
+                        </div>
+                    </div>
+                    
+                    <div class="day-item">
+                        <div class="day-number">Day 4</div>
+                        <h3 class="day-title">Logic and Intuition Balance</h3>
+                        <p class="day-description">Working with your analytical mind rather than fighting against it for clearer connections. Learn to leverage both sides of your thinking.</p>
+                        <div class="day-tags">
+                            <span class="day-tag">Integration</span>
+                            <span class="day-tag">Analysis</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="curriculum-preview">
+                    <div class="preview-content">
+                        <h3>Your Complete Medium eBook</h3>
+                        <p>On day 10, you'll receive all lessons bundled as a comprehensive eBook for future reference and ongoing practice. This will become your personal guidebook for continued mediumship development.</p>
+                        <div class="day-tags">
+                            <span class="day-tag">Complete Guide</span>
+                            <span class="day-tag">Reference</span>
+                            <span class="day-tag">Bonus</span>
+                        </div>
+                    </div>
+                    <div class="preview-image">
+                        <img src="https://i.imgur.com/xM0U2UL.jpeg" alt="The Complete Medium eBook" class="preview-book">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-badge">Success Stories</div>
+                    <h2 class="section-title">What Students Are Saying</h2>
+                    <p class="section-description">Hear from people who have transformed their mediumship practice with these teachings</p>
+                </div>
+                
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-stars">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                            </div>
+                            <p class="testimonial-text">After years of weekend workshops that left me with temporary inspiration but no lasting change, Mia's structured approach gave me the foundation I was missing. Her emphasis on 'sitting in the power' completely transformed my practice.</p>
+                            <div class="testimonial-author">
+                                <div class="testimonial-avatar">E</div>
+                                <div class="testimonial-info">
+                                    <div class="testimonial-name">Elena R.</div>
+                                    <div class="testimonial-title">Development Program Graduate</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-stars">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                            </div>
+                            <p class="testimonial-text">The biggest breakthrough for me was learning how to blend logic and intuition. I always thought my analytical mind was getting in the way, but Mia taught me how to use it as a strength. Now my readings have both depth and evidence.</p>
+                            <div class="testimonial-author">
+                                <div class="testimonial-avatar">M</div>
+                                <div class="testimonial-info">
+                                    <div class="testimonial-name">Michael T.</div>
+                                    <div class="testimonial-title">Professional Medium</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-stars">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                            </div>
+                            <p class="testimonial-text">I've always felt a connection but struggled to bring through specific details. This program gave me the structure I needed to move beyond general impressions to meaningful evidence that truly validates the communication.</p>
+                            <div class="testimonial-author">
+                                <div class="testimonial-avatar">S</div>
+                                <div class="testimonial-info">
+                                    <div class="testimonial-name">Sarah K.</div>
+                                    <div class="testimonial-title">Spiritual Development Student</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="cta">
+            <div class="cta-container">
+                <h2 class="cta-title">Begin Your Medium Development Journey Today</h2>
+                <p class="cta-description">Join thousands of students who have transformed their mediumship abilities with this structured 10-day approach</p>
+                
+                <div class="cta-form">
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Your Email Address" required>
+                        </div>
+                        <button type="submit" class="btn cta-btn">
+                            Get Instant Access
+                            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                        </button>
+                    </form>
+                    <p class="privacy-text">Your data is secure. We'll never share your information or send spam.</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-logo">The <span>Complete</span> Medium</div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Sticky CTA for Mobile -->
+    <div class="sticky-cta">
+        <a href="#" class="sticky-btn" onclick="document.getElementById('email').focus(); return false;">Begin My Spiritual Journey</a>
+    </div>
+    
+    <script>
+        // Scroll effect for header
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Progress bar animation
+        document.querySelectorAll('.progress-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                const progressValue = this.getAttribute('data-progress');
+                const progressFill = this.querySelector('.progress-fill');
+                progressFill.style.transform = `scaleX(${progressValue / 100})`;
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                const progressFill = this.querySelector('.progress-fill');
+                progressFill.style.transform = 'scaleX(0.1)';
+            });
+        });
+        
+        // Reset animation on page load to ensure it plays
+        document.addEventListener('DOMContentLoaded', function() {
+            const highlight = document.querySelector('.hero-title .highlight');
+            if (highlight) {
+                highlight.style.animation = 'none';
+                highlight.offsetHeight; // Trigger reflow
+                highlight.style.animation = null;
+                
+                // Force animation to restart
+                const after = document.createElement('style');
+                after.textContent = `
+                    .hero-title .highlight::after {
+                        animation: none;
+                    }
+                    .hero-title .highlight::before {
+                        animation: none;
+                    }
+                `;
+                document.head.appendChild(after);
+                
+                setTimeout(function() {
+                    document.head.removeChild(after);
+                }, 10);
+            }
+        });
+    </script>
+</body>
+</html>
